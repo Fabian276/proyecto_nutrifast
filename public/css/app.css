@@ -1,0 +1,154 @@
+/* =====================================================================
+   NutriFzst · Prototipo de alta fidelidad · Hoja de estilos propia
+   Se carga DESPUÉS de Bootstrap 5. Al pasar a Laravel va a public/css/app.css
+   ===================================================================== */
+
+:root{
+  /* Color de acento (propuesta, [ELEGIR] con la nutrióloga): verde salvia */
+  --nf-accent:        #2f7a63;
+  --nf-accent-hover:  #26644f;
+  --nf-accent-soft:   #e6f2ed;
+  --nf-ink:           #1f2a27;
+  --nf-muted:         #5c6b66;
+  --nf-line:          #dde5e2;
+  --nf-bg:            #f6f8f7;
+  --nf-surface:       #ffffff;
+  --nf-danger:        #b42318;
+
+  /* Bootstrap toma el acento como color primario */
+  --bs-primary:        var(--nf-accent);
+  --bs-primary-rgb:    47,122,99;
+  --bs-link-color:     var(--nf-accent);
+  --bs-link-color-rgb: 47,122,99;
+  --bs-link-hover-color-rgb: 38,100,79;
+  --bs-link-hover-color: var(--nf-accent-hover);
+  --bs-body-color:     var(--nf-ink);
+  --bs-body-bg:        var(--nf-bg);
+  --bs-border-color:   var(--nf-line);
+  --bs-body-font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --bs-body-font-size: 1.0625rem;   /* 17 px: cómodo para uso diario */
+}
+
+body{ background:var(--nf-bg); }
+
+/* ---------- Botones: grandes y con un solo principal por pantalla ---------- */
+.btn{ min-height:44px; padding:.55rem 1.1rem; font-weight:500; border-radius:.5rem; }
+.btn-sm{ min-height:36px; }
+.btn-primary{
+  --bs-btn-bg:var(--nf-accent); --bs-btn-border-color:var(--nf-accent);
+  --bs-btn-hover-bg:var(--nf-accent-hover); --bs-btn-hover-border-color:var(--nf-accent-hover);
+  --bs-btn-active-bg:var(--nf-accent-hover); --bs-btn-active-border-color:var(--nf-accent-hover);
+  --bs-btn-disabled-bg:var(--nf-accent); --bs-btn-disabled-border-color:var(--nf-accent);
+}
+.btn-outline-primary{
+  --bs-btn-color:var(--nf-accent); --bs-btn-border-color:var(--nf-accent);
+  --bs-btn-hover-bg:var(--nf-accent); --bs-btn-hover-border-color:var(--nf-accent);
+  --bs-btn-active-bg:var(--nf-accent-hover); --bs-btn-active-border-color:var(--nf-accent-hover);
+}
+
+/* Foco visible para teclado */
+:focus-visible{ outline:3px solid #8cc7b4; outline-offset:2px; }
+.form-control:focus,.form-select:focus{
+  border-color:var(--nf-accent);
+  box-shadow:0 0 0 .2rem rgba(47,122,99,.2);
+}
+
+/* ---------- Formularios ---------- */
+.form-label{ font-weight:500; margin-bottom:.3rem; }
+.req::after{ content:" *"; color:var(--nf-danger); }
+.form-text{ color:var(--nf-muted); }
+
+/* ---------- Distribución con menú lateral ---------- */
+.nf-shell{ display:flex; min-height:100vh; }
+.nf-side{
+  width:232px; flex-shrink:0; background:var(--nf-surface);
+  border-right:1px solid var(--nf-line); display:flex; flex-direction:column;
+  position:sticky; top:0; height:100vh;
+}
+.nf-brand{ display:flex; align-items:center; gap:.6rem; padding:1.25rem 1.25rem 1rem; font-weight:700; font-size:1.2rem; color:var(--nf-ink); text-decoration:none; }
+.nf-brand-mark{ width:34px; height:34px; border-radius:9px; background:var(--nf-accent); color:#fff; display:grid; place-items:center; font-size:1rem; }
+.nf-nav a{
+  display:flex; align-items:center; gap:.65rem; margin:.15rem .75rem; padding:.65rem .8rem;
+  border-radius:.5rem; color:var(--nf-ink); text-decoration:none;
+}
+.nf-nav a:hover{ background:var(--nf-bg); }
+.nf-nav a.active{ background:var(--nf-accent-soft); color:var(--nf-accent); font-weight:600; }
+.nf-nav svg{ width:20px; height:20px; flex-shrink:0; }
+.nf-side-foot{ margin-top:auto; padding:1rem .75rem; border-top:1px solid var(--nf-line); }
+.nf-user{ font-size:.9rem; color:var(--nf-muted); padding:0 .8rem .5rem; }
+
+.nf-main{ flex-grow:1; min-width:0; display:flex; flex-direction:column; }
+.nf-content{ padding:2rem 2.25rem; max-width:1200px; width:100%; }
+.nf-topbar{ display:none; }
+
+@media (max-width: 991.98px){
+  .nf-side{ display:none; }
+  .nf-topbar{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:.6rem 1rem; background:var(--nf-surface); border-bottom:1px solid var(--nf-line);
+  }
+  .nf-content{ padding:1.25rem 1rem; }
+}
+
+/* ---------- Encabezados de página ---------- */
+.nf-page-head{ display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-start; gap:1rem; margin-bottom:1.5rem; }
+.nf-page-head h1{ font-size:1.75rem; font-weight:700; margin:0; }
+.nf-sub{ color:var(--nf-muted); margin-top:.25rem; }
+.breadcrumb{ font-size:.9rem; margin-bottom:.75rem; }
+
+/* ---------- Tarjetas y tablas ---------- */
+.nf-card{ background:var(--nf-surface); border:1px solid var(--nf-line); border-radius:.75rem; }
+.nf-card-pad{ padding:1.25rem 1.5rem; }
+.nf-stat-label{ font-size:.85rem; color:var(--nf-muted); }
+.nf-stat-value{ font-size:1.6rem; font-weight:700; line-height:1.2; font-variant-numeric:tabular-nums; }
+.nf-delta-down{ color:var(--nf-accent); }
+.nf-delta-up{ color:#9a5b00; }
+
+.nf-table{ margin:0; --bs-table-bg:transparent; }
+.nf-table thead th{ font-size:.82rem; text-transform:uppercase; letter-spacing:.03em; color:var(--nf-muted); font-weight:600; background:var(--nf-bg); border-bottom:1px solid var(--nf-line); }
+.nf-table td,.nf-table th{ padding:.85rem 1rem; vertical-align:middle; }
+.nf-table td.num{ font-variant-numeric:tabular-nums; }
+.nf-row-link{ cursor:pointer; }
+.nf-row-link:hover td{ background:var(--nf-accent-soft); }
+
+/* ---------- Formulario de consulta ---------- */
+.nf-section{ background:var(--nf-surface); border:1px solid var(--nf-line); border-radius:.75rem; padding:1.25rem 1.5rem; margin-bottom:1rem; }
+.nf-section h2{ font-size:1.1rem; font-weight:600; margin-bottom:1rem; display:flex; align-items:center; gap:.5rem; }
+.nf-step{ width:26px; height:26px; border-radius:50%; background:var(--nf-accent-soft); color:var(--nf-accent); display:inline-grid; place-items:center; font-size:.85rem; font-weight:700; }
+.nf-key-input{ font-size:1.35rem; font-weight:600; font-variant-numeric:tabular-nums; }
+.nf-prev{ font-size:.9rem; color:var(--nf-muted); }
+.nf-savebar{
+  position:sticky; bottom:0; z-index:20; background:rgba(255,255,255,.96);
+  border-top:1px solid var(--nf-line); padding:.9rem 2.25rem;
+  display:flex; justify-content:flex-end; gap:.75rem;
+  backdrop-filter:saturate(1.2) blur(4px);
+}
+@media (max-width: 991.98px){ .nf-savebar{ padding:.75rem 1rem; } }
+details.nf-optional > summary{ cursor:pointer; font-weight:600; color:var(--nf-accent); padding:.25rem 0; }
+
+/* ---------- Agenda ---------- */
+.nf-day{ font-size:.85rem; text-transform:uppercase; letter-spacing:.04em; color:var(--nf-muted); font-weight:600; margin:1.25rem 0 .5rem; }
+.nf-appt{ display:flex; align-items:center; gap:1rem; padding:1rem 1.25rem; border-bottom:1px solid var(--nf-line); color:var(--nf-ink); text-decoration:none; }
+.nf-appt:last-child{ border-bottom:0; }
+.nf-appt:hover{ background:var(--nf-accent-soft); }
+.nf-appt-time{ font-weight:700; font-variant-numeric:tabular-nums; min-width:3.5rem; }
+
+/* ---------- Inicio de sesión ---------- */
+.nf-login{ min-height:100vh; display:grid; place-items:center; padding:1rem; background:linear-gradient(180deg,var(--nf-accent-soft),var(--nf-bg) 60%); }
+.nf-login-card{ width:100%; max-width:400px; }
+
+/* ---------- Avisos ---------- */
+.nf-demo-flag{ font-size:.75rem; background:#fff4d6; color:#7a5500; border:1px solid #f0d58a; border-radius:999px; padding:.15rem .6rem; white-space:nowrap; }
+.nf-empty{ text-align:center; color:var(--nf-muted); padding:2.5rem 1rem; }
+.badge-prog{ background:var(--nf-accent-soft); color:var(--nf-accent); font-weight:600; }
+
+/* El texto de error de Bootstrap con mejor contraste */
+.invalid-feedback{ color:var(--nf-danger); font-weight:500; }
+.form-control.is-invalid,.form-select.is-invalid{ border-color:var(--nf-danger); }
+
+/* --- Añadido en la versión Laravel: "Cerrar sesión" es un botón (POST + CSRF), no un enlace --- */
+.nf-nav button{
+  display:flex; align-items:center; gap:.65rem; width:calc(100% - 1.5rem); margin:.15rem .75rem; padding:.65rem .8rem;
+  border:0; background:none; text-align:left; border-radius:.5rem; color:var(--nf-ink); font:inherit;
+}
+.nf-nav button:hover{ background:var(--nf-bg); }
