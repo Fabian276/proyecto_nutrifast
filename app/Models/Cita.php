@@ -20,4 +20,19 @@ class Cita extends Model
     {
         return $this->belongsTo(Paciente::class);
     }
+
+    /** Mensaje de recordatorio para mandar por WhatsApp. */
+    public function mensajeRecordatorio(): string
+    {
+        $fecha = $this->fecha_hora->locale('es')->isoFormat('dddd D [de] MMMM');
+
+        return "Hola {$this->paciente->nombre}, te recordamos tu cita de nutrición el {$fecha} a las {$this->fecha_hora->format('H:i')} hrs."
+            .($this->motivo ? " Motivo: {$this->motivo}." : '')
+            .' Si necesitas cambiarla, avísanos por este medio. ¡Te esperamos!';
+    }
+
+    public function whatsappUrl(): ?string
+    {
+        return $this->paciente->whatsappUrl($this->mensajeRecordatorio());
+    }
 }

@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CitaController;
 use App\Http\Controllers\ConsultaController;
 use App\Http\Controllers\PacienteController;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\ProgresoController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/pacientes/{paciente}/consultas', [ConsultaController::class, 'store'])->name('consultas.store');
     Route::get('/pacientes/{paciente}/consultas/{consulta}', [ConsultaController::class, 'show'])
         ->scopeBindings()->name('consultas.show');
+
+    Route::get('/pacientes/{paciente}/pdf', [PdfController::class, 'paciente'])->name('pacientes.pdf');
+    Route::get('/pacientes/{paciente}/consultas/{consulta}/pdf', [PdfController::class, 'consulta'])
+        ->scopeBindings()->name('consultas.pdf');
 
     Route::get('/pacientes/{paciente}/progreso', [ProgresoController::class, 'show'])->name('progreso.show');
 

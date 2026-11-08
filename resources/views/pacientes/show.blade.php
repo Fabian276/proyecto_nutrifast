@@ -12,6 +12,10 @@
     </div>
     <div class="d-flex flex-wrap gap-2">
       <button type="button" class="btn btn-outline-secondary" data-abrir-modal>Editar datos</button>
+      <a class="btn btn-outline-secondary" href="{{ route('pacientes.pdf', $paciente) }}">Descargar PDF</a>
+      @if($paciente->proximaCita && ($wa = $paciente->proximaCita->setRelation('paciente', $paciente)->whatsappUrl()))
+        <a class="btn btn-wa" href="{{ $wa }}" target="_blank" rel="noopener">Recordar cita por WhatsApp</a>
+      @endif
       @if($consultas->count() >= 2)
         <a class="btn btn-outline-primary" href="{{ route('progreso.show', $paciente) }}">Ver progreso</a>
       @else

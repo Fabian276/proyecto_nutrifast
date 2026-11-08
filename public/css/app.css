@@ -131,6 +131,10 @@ details.nf-optional > summary{ cursor:pointer; font-weight:600; color:var(--nf-a
 .nf-appt{ display:flex; align-items:center; gap:1rem; padding:1rem 1.25rem; border-bottom:1px solid var(--nf-line); color:var(--nf-ink); text-decoration:none; }
 .nf-appt:last-child{ border-bottom:0; }
 .nf-appt:hover{ background:var(--nf-accent-soft); }
+.nf-appt-info{ flex:1 1 auto; min-width:0; }
+.nf-appt-link{ display:flex; align-items:center; gap:1rem; flex-grow:1; min-width:0; color:inherit; text-decoration:none; }
+.btn-wa{ display:inline-flex; align-items:center; gap:.4rem; background:#25d366; border-color:#25d366; color:#fff; white-space:nowrap; }
+.btn-wa:hover, .btn-wa:focus{ background:#1ebe5b; border-color:#1ebe5b; color:#fff; }
 .nf-appt-time{ font-weight:700; font-variant-numeric:tabular-nums; min-width:3.5rem; }
 
 /* ---------- Inicio de sesión ---------- */

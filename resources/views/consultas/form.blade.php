@@ -139,10 +139,18 @@
 <div class="nf-savebar">
   @unless($ro)<span class="me-auto align-self-center small text-body-secondary d-none d-md-inline">Ctrl + Enter para guardar</span>@endunless
   <a href="{{ route('pacientes.show', $paciente) }}" class="btn btn-outline-secondary btn-lg">{{ $ro ? 'Volver al expediente' : 'Cancelar' }}</a>
-  @unless($ro)<button type="submit" form="form-consulta" class="btn btn-primary btn-lg px-5">Guardar consulta</button>@endunless
+  @if($ro)<a href="{{ route('consultas.pdf', [$paciente, $consulta]) }}" class="btn btn-primary btn-lg">Descargar PDF para el paciente</a>@endif
+  @unless($ro)
+    <button type="submit" form="form-consulta" name="accion" value="pdf" class="btn btn-outline-primary btn-lg">Guardar y descargar PDF</button>
+    <button type="submit" form="form-consulta" class="btn btn-primary btn-lg px-5">Guardar consulta</button>
+  @endunless
 </div>
 @endsection
 
 @push('scripts')
 @unless($ro)<script src="{{ asset('js/consulta.js') }}"></script>@endunless
+@if($ro && session('descargar_pdf'))
+<script type="application/json" id="nf-descargar-pdf">@json(route('consultas.pdf', [$paciente, $consulta]))</script>
+<script>window.location.href = JSON.parse(document.getElementById("nf-descargar-pdf").textContent);</script>
+@endif
 @endpush

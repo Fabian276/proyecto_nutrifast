@@ -56,4 +56,24 @@ class Paciente extends Model
     {
         return $this->fecha_nacimiento->age;
     }
+
+    /** Teléfono sólo con dígitos y lada de país. Números de 10 dígitos se toman como de México (+52). */
+    public function getTelefonoWhatsappAttribute(): ?string
+    {
+        $digitos = preg_replace('/\D+/', '', (string) $this->telefono);
+
+        if (strlen($digitos) === 10) {
+            return '52'.$digitos;
+        }
+
+        return strlen($digitos) >= 11 ? $digitos : null;
+    }
+
+    /** Liga de WhatsApp con el mensaje ya escrito, o null si el paciente no tiene un teléfono válido. */
+    public function whatsappUrl(string $mensaje): ?string
+    {
+        return $this->telefono_whatsapp
+            ? 'https://wa.me/'.$this->telefono_whatsapp.'?text='.rawurlencode($mensaje)
+            : null;
+    }
 }

@@ -43,7 +43,7 @@ class ConsultaController extends Controller
             ])
             ->filter(fn ($m) => $m['nombre'] !== '');
 
-        DB::transaction(function () use ($datos, $paciente, $imc, $medicamentos) {
+        $consulta = DB::transaction(function () use ($datos, $paciente, $imc, $medicamentos) {
             $consulta = $paciente->consultas()->create([
                 'fecha_consulta' => $datos['fecha'],
                 'observaciones' => $datos['observaciones'] ?? null,
@@ -80,10 +80,19 @@ class ConsultaController extends Controller
                     'estado' => 'programada',
                 ]);
             }
+
+            return $consulta;
         });
 
-        return redirect()->route('pacientes.show', $paciente)
-            ->with('status', 'Consulta guardada'.(! empty($datos['cita_fecha']) ? ' y próxima cita registrada.' : '.'));
+        $aviso = 'Consulta guardada'.(! empty($datos['cita_fecha']) ? ' y próxima cita registrada.' : '.');
+
+        // "Guardar y descargar PDF": se abre la consulta guardada y desde ahí se descarga la hoja.
+        if ($request->input('accion') === 'pdf') {
+            return redirect()->route('consultas.show', [$paciente, $consulta])
+                ->with('status', $aviso)->with('descargar_pdf', true);
+        }
+
+        return redirect()->route('pacientes.show', $paciente)->with('status', $aviso);
     }
 
     /** Consulta ya guardada: sólo lectura. */

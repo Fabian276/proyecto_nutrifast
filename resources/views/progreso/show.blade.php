@@ -15,10 +15,11 @@
 
   <div class="nf-card nf-card-pad mb-3">
     <div class="row g-3 align-items-end">
-      <div class="col-md-4"><label for="indicador" class="form-label">Indicador</label><select id="indicador" class="form-select"></select></div>
-      <div class="col-6 col-md-3"><label for="desde" class="form-label">Desde</label><input id="desde" type="date" class="form-control"></div>
-      <div class="col-6 col-md-3"><label for="hasta" class="form-label">Hasta</label><input id="hasta" type="date" class="form-control"></div>
-      <div class="col-md-2"><div class="btn-group w-100" role="group" aria-label="Tipo de vista">
+      <div class="col-6 col-lg-3"><label for="indicador" class="form-label">Indicador</label><select id="indicador" class="form-select"></select></div>
+      <div class="col-6 col-lg-3"><label for="comparar" class="form-label">Comparar con</label><select id="comparar" class="form-select"></select></div>
+      <div class="col-6 col-lg-2"><label for="desde" class="form-label">Desde</label><input id="desde" type="date" class="form-control"></div>
+      <div class="col-6 col-lg-2"><label for="hasta" class="form-label">Hasta</label><input id="hasta" type="date" class="form-control"></div>
+      <div class="col-lg-2"><div class="btn-group w-100" role="group" aria-label="Tipo de vista">
         <button type="button" class="btn btn-primary" data-vista="grafica" aria-pressed="true">Gráfica</button>
         <button type="button" class="btn btn-outline-primary" data-vista="tabla" aria-pressed="false">Tabla</button>
       </div></div>
@@ -42,7 +43,7 @@
 @endsection
 
 @push('scripts')
-<script>window.NF_PROGRESO = @json($datos);</script>
+<script type="application/json" id="nf-progreso-datos">@json($datos)</script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <script src="{{ asset('js/progreso.js') }}"></script>
 @endpush
